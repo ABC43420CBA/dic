@@ -222,7 +222,7 @@ def tianjia():#加厚词典的手段之一！
     （输入英文单词或词组以及中文，中间用一个空格隔开，中文和英文何者在前都可以）')
     jiaru_l=list(jiaru)
 
-    print('jiaru_l',jiaru_l)
+    #print('jiaru_l',jiaru_l)
     
     pd=fenbianmoshi(jiaru_l)
 
