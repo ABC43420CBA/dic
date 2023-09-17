@@ -1,4 +1,4 @@
-import copy#用于实行deepcopy()
+import copy#用于实行deepcopy()    （教训深刻QAQ）
 
 
 def fenbianmoshi(jiaru_l):#看是“英语在前”还是“中文在前”
