@@ -1,4 +1,4 @@
-import copy
+import copy#用于实行deepcopy()
 
 
 def fenbianmoshi(jiaru_l):#看是“英语在前”还是“中文在前”
@@ -173,7 +173,7 @@ def Chinese_union(s):#将单个中文字符相连形成一个英语单词or词�
     return copy.deepcopy(l[0])
 
 
-def jiayi(write):#对词典中已存在的单词或词组增加中文释义
+def jiayi(write):#对词典中已有词增加中文释义
     nage=0
     for i in range(len(E)):
         if E[i]==write[0]:
@@ -185,8 +185,9 @@ def jiayi(write):#对词典中已存在的单词或词组增加中文释义
     for j in range(len(write[1])):
         differ=1
         for k in range(len(nC[nage])):
-            if nC[nage][j]==write[1][k]:
+            if nC[nage][k]==write[1][j]:
                 differ=0
+                break
         if differ==1:
             different.append(copy.deepcopy(write[1][j]))
     if len(different)==0:
@@ -197,12 +198,14 @@ def jiayi(write):#对词典中已存在的单词或词组增加中文释义
         #print(E[nage]+' '+Chinese_union(different))
 
 
-def xie_ru(write):#写入一组“词-义”
+def xie_ru(write):#写入到词典中
     if chaxun(''.join(write[0]))==1:
         print('存在该词！')
-        if input('是否增加释义？（是则输入y，否则输入其他字符）')=='y':
+        if input('是否增加释义？')=='y':
+            '''
             for h in range(len(write[1])):
                 write[1][h]=''.join(write[1][h])
+                '''
             jiayi(write)
     else:
         '''
@@ -418,4 +421,4 @@ if tuichu==0:
 print('已退出！可查看词典文件！')
 
 
-#感觉这有点像一个rubbish program……
+#感觉这有点像个rubbish program啊……    (lll￢ω￢)
