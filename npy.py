@@ -1,7 +1,7 @@
 import copy
 
 
-def fenbianmoshi(jiaru_l):
+def fenbianmoshi(jiaru_l):#看是“英语在前”还是“中文在前”
     '''
     if (ord(jiaru_l[0]) not in range(65,91))&(ord(jiaru_l[0] not in range(97,123)))&(ord(\
         jiaru_l[0])!=32):
@@ -68,7 +68,7 @@ def fenbianmoshi(jiaru_l):
         return [0,0]
 
 
-def zh(jiaru_l,i):
+def zh(jiaru_l,i):#中文在后
     Eng=[]
     Chi=[]
     nC=[]
@@ -113,7 +113,7 @@ def zh(jiaru_l,i):
     return [Eng,nC]#这是write的存储
 
 
-def zq(jiaru_l,i):
+def zq(jiaru_l,i):#中文在前
     Eng=[]
     Chi=[]
     nC=[]
@@ -135,7 +135,7 @@ def zq(jiaru_l,i):
     return [Eng,nC]#这是write的结果
 
 
-def chaxun(s):
+def chaxun(s):#实现词典“查询”功能
     zhaodao=0
     sl=list(s)
     for i in range(len(E)):
@@ -158,7 +158,7 @@ def chaxun(s):
         return 1
 
 
-def Chinese_union(s):
+def Chinese_union(s):#将单个中文字符相连形成一个英语单词or词组的完整释义
     length=len(s)
     l=[]
     for i in range(length):
@@ -173,7 +173,7 @@ def Chinese_union(s):
     return copy.deepcopy(l[0])
 
 
-def jiayi(write):
+def jiayi(write):#对词典中已存在的单词或词组增加中文释义
     nage=0
     for i in range(len(E)):
         if E[i]==write[0]:
@@ -197,10 +197,10 @@ def jiayi(write):
         #print(E[nage]+' '+Chinese_union(different))
 
 
-def xie_ru(write):
+def xie_ru(write):#写入一组“词-义”
     if chaxun(''.join(write[0]))==1:
         print('存在该词！')
-        if input('是否增加释义？')=='y':
+        if input('是否增加释义？（是则输入y，否则输入其他字符）')=='y':
             for h in range(len(write[1])):
                 write[1][h]=''.join(write[1][h])
             jiayi(write)
@@ -214,8 +214,9 @@ def xie_ru(write):
         nC.append(copy.deepcopy(write[1]))
 
 
-def tianjia():
-    jiaru=input('加什么？')
+def tianjia():#加厚词典的手段之一！
+    jiaru=input('加什么？\n\
+    （输入英文单词或词组以及中文，中间用一个空格隔开，中文和英文何者在前都可以）')
     jiaru_l=list(jiaru)
 
     print('jiaru_l',jiaru_l)
@@ -235,7 +236,7 @@ def tianjia():
         xie_ru(write)
 
 
-def fl(yiyouci):
+def fl(yiyouci):#将对象读入内存后分割English与Chinese，对其分开存储
     #cache=[]
     E=[]
     C=[]
@@ -268,7 +269,7 @@ def fl(yiyouci):
         else:
             E.append([])
             C.append([])
-            #nC=[]#不如改为三层？===============================================
+            #nC=[]#不如改为三层？===============================================算了吧。
             for i in range(len(yiyouci_l[j])):
                 if i<w:
                     E[-1].append(copy.deepcopy(yiyouci_l[j][i]))
@@ -296,7 +297,7 @@ def fl(yiyouci):
     return [E,nC]
 
 
-def xie_yi_xie():
+def xie_yi_xie():#最后：将E与nC以合适的组织形式写入到文件中
     fp=open('cidian.txt','w')
     #fp.seek(0)
 
@@ -351,10 +352,12 @@ while (cishu==0):
     nC=fenlie[1]
     fp.seek(0)
     #print(fp.tell())
+    '''
     if cishu!=0:
         print('指针当前位置：'+str(fp.tell()))
         if input('指针归位吗？')=='y':
             fp.seek(0)
+            '''
     caozuo=input('干什么？\n添加还是查询还是退出？')
     cishu+=1
     if caozuo=='退出':
@@ -367,7 +370,7 @@ while (cishu==0):
             tianjia()
             #fp.close()
         elif caozuo=='查询':
-            chaxun(input('查什么？哪个？'))
+            chaxun(input('查什么？哪个？（输入英文单词或词组）'))
             #fp.close()
         else :
             print('Wrong input!')
@@ -377,7 +380,7 @@ while (cishu==0):
     #print('已退出！可查看词典文件！')
     #fp.close()
 if tuichu==0:
-    while (input('Continue?')=='y'):
+    while (input('Continue?（是则输入y，否则输入其他字符以实现退出）')=='y'):
         fp=open('cidian.txt','a+')
         fp.seek(0)
         yiyouci=fp.readlines()
@@ -403,7 +406,7 @@ if tuichu==0:
                 tianjia()
                 #fp.close()
             elif caozuo=='查询':
-                chaxun(input('查什么？哪个？'))
+                chaxun(input('查什么？哪个？（输入英文单词或词组）'))
                 #fp.close()
             else :
                 print('Wrong input!')
@@ -413,3 +416,6 @@ if tuichu==0:
         #print('已退出！可查看词典文件！')
         #fp.close()
 print('已退出！可查看词典文件！')
+
+
+#感觉这有点像一个rubbish program……
